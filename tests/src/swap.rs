@@ -131,7 +131,7 @@ mod swap_tests {
 
         match client.get_quote(&quote).await {
             Ok(quote_res) => {
-                let swap = SwapRequest::new(TEST_USER_PUBKEY, quote_res);
+                let swap = SwapRequest::new(TEST_USER_PUBKEY, TEST_USER_PUBKEY, quote_res);
 
                 assert_eq!(
                     swap.user_public_key, TEST_USER_PUBKEY,
@@ -163,7 +163,7 @@ mod swap_tests {
             Err(err) => panic!("Failed to get quote for swap test: {:?}", err),
         };
 
-        let swap = SwapRequest::new(TEST_USER_PUBKEY, quote_res);
+        let swap = SwapRequest::new(TEST_USER_PUBKEY, TEST_USER_PUBKEY, quote_res);
 
         match client.get_swap_transaction(&swap).await {
             Ok(swap_res) => {

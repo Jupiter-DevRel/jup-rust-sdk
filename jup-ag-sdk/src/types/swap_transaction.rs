@@ -13,6 +13,9 @@ pub struct SwapRequest {
     /// Rquired. The public key of the user initiating the swap.
     pub user_public_key: String,
 
+    /// Allow a custom payer to pay for the transaction
+    pub payer: String,
+
     /// Automatically wrap/unwrap native SOL to/from WSOL Default (true)
     /// When true, uses SOL and unwraps WSOL post-swap.
     /// When false, uses WSOL only and leaves it wrapped.
@@ -113,6 +116,7 @@ impl SwapRequest {
     ///
     /// # Arguments
     /// * `input_wallet` - The user's public key as a string.
+    /// * `payer` - payer to pay for the transaction
     /// * `quote` - The `QuoteResponse` obtained from a quoting endpoint.
     ///
     /// # Returns
@@ -122,9 +126,14 @@ impl SwapRequest {
     /// ```
     /// let payload = SwapRequest::new("YourPubKey...", quote);
     /// ```
-    pub fn new(input_wallet: &str, quote: QuoteResponse) -> Self {
+    pub fn new(
+        input_wallet: impl Into<String>,
+        payer: impl Into<String>,
+        quote: QuoteResponse,
+    ) -> Self {
         Self {
-            user_public_key: input_wallet.to_string(),
+            user_public_key: input_wallet.into(),
+            payer: payer.into(),
             wrap_and_unwrap_sol: None,
             use_shared_accounts: None,
             fee_account: None,

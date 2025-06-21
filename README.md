@@ -13,7 +13,7 @@ or Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-jup-ag-sdk = "1.0.3"
+jup-ag-sdk = "1.0.4"
 ```
 
 ## Features
@@ -83,6 +83,7 @@ async fn main() {
 
 - [API Documentation](https://dev.jup.ag/)
 - [Discord](https://discord.gg/jup)
+- [crates.io](https://crates.io/crates/jup-ag-sdk)
 
 ## Local
 

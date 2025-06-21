@@ -32,7 +32,11 @@ pub async fn swap() {
 
     let quote_res = client.get_quote(&quote).await.expect("Failed to get quote");
 
-    let payload = SwapRequest::new("input_your_wallet_address", quote_res);
+    let payload = SwapRequest::new(
+        "input_your_wallet_address",
+        "payer_wallet_address",
+        quote_res,
+    );
     let swap_res: SwapResponse = client
         .get_swap_transaction(&payload)
         .await
@@ -96,7 +100,11 @@ pub async fn swap_with_instructions() {
     let quote_res = client.get_quote(&quote).await.expect("Failed to get quote");
 
     // get swap instructions
-    let payload = SwapRequest::new("EXBdeRCdiNChKyD7akt64n9HgSXEpUtpPEhmbnm4L6iH", quote_res);
+    let payload = SwapRequest::new(
+        "EXBdeRCdiNChKyD7akt64n9HgSXEpUtpPEhmbnm4L6iH",
+        "payer_wallet_address",
+        quote_res,
+    );
 
     let swap_instructions = client
         .get_swap_instructions(&payload)
